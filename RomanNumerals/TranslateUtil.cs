@@ -2,6 +2,17 @@
 public static class TranslateUtil
 {
     public const uint maxValue = 4000000000;
+    private static readonly string[] powersOf1 = {"I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"};
+    private static readonly string[] powersOf10 = {"X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"};
+    private static readonly string[] powersOf100 = {"C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"};
+    private static readonly string[] powersOf1000 = {"M", "MM", "MMM", "Ma", "a", "aM", "aMM", "aMMM", "Mh"};
+    private static readonly string[] powersOf10000 = {"h", "hh", "hhh", "hf", "f", "fh", "fhh", "fhhh", "he"};
+    private static readonly string[] powersOf100000 = {"e", "ee", "eee", "eb", "b", "be", "bee", "beee", "ew"};
+    private static readonly string[] powersOf1000000 = {"w", "ww", "www", "wA", "A", "Aw", "Aww", "Awww", "wH"};
+    private static readonly string[] powersOf10000000 = {"H", "HH", "HHH", "HF", "F", "FH", "FHH", "FHHH", "HE"};
+    private static readonly string[] powersOf100000000 = {"E", "EE", "EEE", "EB", "B", "BE", "BEE", "BEEE", "EW"};
+    private static readonly string[] powersOf1000000000 = {"W", "WW", "WWW", "", "", "", "", "", ""};
+    private static List<string[]> powers = new List<string[]> {powersOf1000000000, powersOf100000000, powersOf10000000, powersOf1000000, powersOf100000, powersOf10000, powersOf1000, powersOf100, powersOf10, powersOf1};
 
     public static string ArabicToRoman(string arabicInput)
     {
@@ -31,34 +42,34 @@ public static class TranslateUtil
                     switch (powers)
                     {
                         case 1:
-                            romanized = (new string[] {"I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"})[n];
+                            romanized = powersOf1[n];
                             break;
                         case 10:
-                            romanized = (new string[] {"X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXX", "XC"})[n] + romanized;
+                            romanized = powersOf10[n] + romanized;
                             break;
                         case 100:
-                            romanized = (new string[] {"C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"})[n] + romanized;
+                            romanized = powersOf100[n] + romanized;
                             break;
                         case 1000:
-                            romanized = (new string[] {"M", "MM", "MMM", "Ma", "a", "aM", "aMM", "aMMM", "Mh"})[n] + romanized;
+                            romanized = powersOf1000[n] + romanized;
                             break;
                         case 10000:
-                            romanized = (new string[] {"h", "hh", "hhh", "hf", "f", "fh", "fhh", "fhhh", "he"})[n] + romanized;
+                            romanized = powersOf10000[n] + romanized;
                             break;
                         case 100000:
-                            romanized = (new string[] {"e", "ee", "eee", "eb", "b", "be", "bee", "beee", "ew"})[n] + romanized;
+                            romanized = powersOf100000[n] + romanized;
                             break;
                         case 1000000:
-                            romanized = (new string[] {"w", "ww", "www", "wA", "A", "Aw", "Aww", "Awww", "wH"})[n] + romanized;
+                            romanized = powersOf1000000[n] + romanized;
                             break;
                         case 10000000:
-                            romanized = (new string[] {"H", "HH", "HHH", "HF", "F", "FH", "FHH", "FHHH", "HE"})[n] + romanized;
+                            romanized = powersOf10000000[n] + romanized;
                             break;
                         case 100000000:
-                            romanized = (new string[] {"E", "EE", "EEE", "EB", "B", "BE", "BEE", "BEEE", "EW"})[n] + romanized;
+                            romanized = powersOf100000000[n] + romanized;
                             break;
                         case 1000000000:
-                            romanized = (new string[] {"W", "WW", "WWW", "", "", "", "", "", ""})[n] + romanized;
+                            romanized = powersOf1000000000[n] + romanized;
                             break;
                     }
 
@@ -73,7 +84,25 @@ public static class TranslateUtil
 
     public static uint RomanToArabic(string romanInput)
     {
-        // TODO: Implement method.
-        return 0;
+        uint arabicized = 0;
+        uint seed = 1000000000;
+
+        foreach (var power in powers)
+        {
+            var n = -1;
+            var m = 0;
+            foreach (var item in power)
+            {
+                if (!String.IsNullOrWhiteSpace(item) && romanInput.Contains(item))
+                    n = m;
+                m++;
+            }
+            if (n > -1) {
+                arabicized += (uint) (n+1) * seed;
+                romanInput = romanInput.Remove(0, power[n].Length);
+            }
+            seed /= 10;
+        }
+        return arabicized;
     }
 }

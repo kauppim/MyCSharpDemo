@@ -6,7 +6,7 @@ Includes a class library to convert between Arabic and Roman numerals.
 
 ## How to run
 
-TODO: Add instructions how to use the program.
+`dotnet run --project DemoApp\DemoApp.csproj`
 
 ## Class RomanNumerals
 
@@ -31,7 +31,7 @@ TODO: Description of the method. Add tests.
 
 ### Method RomanToArabic
 
-TODO: Implement and describe the method. Add tests.
+TODO: Description of the method. Add tests.
 
 ## Steps to create a solution
 
