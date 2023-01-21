@@ -63,10 +63,8 @@ public static class TranslateUtil
                     }
 
                 }
-                Console.WriteLine("Current value: " + romanized);
                 temp = (temp - n) / 10;
                 powers *= 10;
-                Console.WriteLine("Temp: " + temp);
             }
         }
         

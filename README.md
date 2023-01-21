@@ -4,6 +4,10 @@ Demo project for my C# snippets.
 
 Includes a class library to convert between Arabic and Roman numerals.
 
+## How to run
+
+TODO: Add instructions how to use the program.
+
 ## Class RomanNumerals
 
 Transforms Arabic numbers to their Roman equivalents, and vice versa. Smallest allowed value is 1, and biggest allowed value is 3.999.999.999.
@@ -23,11 +27,11 @@ With this notation, the number 3.594.798.739 would be WWWBHEwAbeeheaMMMDCCXXXIX 
 
 ### Method ArabicToRoman
 
-TODO: Description of the method.
+TODO: Description of the method. Add tests.
 
 ### Method RomanToArabic
 
-TODO: Implement and describe the method.
+TODO: Implement and describe the method. Add tests.
 
 ## Steps to create a solution
 
